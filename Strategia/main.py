@@ -20,10 +20,17 @@ tile_size = 16
 textures = {0: [pygame.image.load('0.png')],
 			1: [pygame.image.load('1.png')]}
 
+world_size_block_x = 128
+world_size_block_y = 128
+
+
+
 world_size_chunk_x = 1024//chunk_size
 world_size_chunk_y = 1024//chunk_size
 
-world_map = Image.open('world.png').load()
+world_map = Image.open('world.png')
+#world_map = world_map.resize((world_size_block_x, world_size_block_y), Image.ANTIALIAS)
+world_map = world_map.load()
 
 def point_to_tile(x, y):
 	tile_x = x//tile_size
@@ -41,7 +48,7 @@ def point_to_chank(x, y):
 	chunk_y = int(tile_gy//chunk_size)
 
 	if (cam_x < 0 or chunk_y < 0) or (chunk_x > world_size_chunk_x-1 or chunk_y > world_size_chunk_y-1):
-		return Nonez	
+		return None	
 
 	return [tile_x, tile_y, chunk_x, chunk_y]
 
